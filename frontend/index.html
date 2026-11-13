@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillSwap | Learn Together</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">S</span> SkillSwap</a>
+    <nav id="mainNav" class="hidden">
+      <button class="nav-link active" data-view="dashboard">Dashboard</button>
+      <button class="nav-link" data-view="discover">Discover</button>
+      <button class="nav-link" data-view="skills">My Skills</button>
+      <button class="nav-link" data-view="requests">Requests</button>
+    </nav>
+    <div class="top-actions">
+      <span id="navUser" class="nav-user"></span>
+      <button id="logoutBtn" class="btn btn-outline hidden">Log out</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="authView" class="auth-layout">
+      <div class="hero-copy">
+        <p class="eyebrow">SHARE WHAT YOU KNOW · LEARN WHAT YOU LOVE</p>
+        <h1>Great skills grow<br><span>when shared.</span></h1>
+        <p class="hero-text">Connect with fellow students, exchange knowledge, and grow together — one skill at a time.</p>
+        <div class="hero-points"><span>✦ Peer-to-peer learning</span><span>✦ Skill-based matching</span><span>✦ Student community</span></div>
+      </div>
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-auth="login">Log in</button>
+          <button class="auth-tab" data-auth="register">Create account</button>
+        </div>
+        <form id="authForm">
+          <h2 id="authTitle">Welcome back</h2>
+          <p id="authSubtitle" class="muted">Log in to continue your learning journey.</p>
+          <label id="nameLabel" class="hidden">Full name<input id="authName" type="text" placeholder="Your name"></label>
+          <label>Email address<input id="authEmail" type="email" placeholder="you@example.com" required></label>
+          <label>Password<input id="authPassword" type="password" placeholder="At least 8 characters" minlength="8" required></label>
+          <button class="btn btn-primary full" type="submit" id="authSubmit">Log in</button>
+          <p id="authMessage" class="form-message" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="appView" class="hidden">
+      <div class="welcome-row">
+        <div><p class="eyebrow">YOUR LEARNING COMMUNITY</p><h1 id="welcomeTitle">Welcome to SkillSwap</h1><p class="muted">Teach a little. Learn a lot. Grow together.</p></div>
+        <div class="welcome-icon">✦</div>
+      </div>
+
+      <section id="dashboardView" class="view">
+        <div class="stat-grid">
+          <article class="stat-card"><span class="stat-icon lavender">↗</span><p>Skills I teach</p><strong id="teachCount">0</strong></article>
+          <article class="stat-card"><span class="stat-icon mint">＋</span><p>Skills I want to learn</p><strong id="learnCount">0</strong></article>
+          <article class="stat-card"><span class="stat-icon peach">◎</span><p>Potential matches</p><strong id="matchCount">0</strong></article>
+          <article class="stat-card"><span class="stat-icon blue">✉</span><p>Open requests</p><strong id="requestCount">0</strong></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel"><div class="panel-heading"><div><p class="eyebrow">GET STARTED</p><h2>Build your skill profile</h2></div></div><p class="muted">Add at least one skill you can teach and one skill you want to learn. SkillSwap will suggest students whose interests complement yours.</p><button class="btn btn-primary" data-go="skills">Add my skills</button></article>
+          <article class="panel accent-panel"><p class="eyebrow">THE SKILLSWAP IDEA</p><h2>Knowledge is better when it's shared.</h2><p>Find a peer who can teach what you want to learn — and share your own strengths in return.</p><button class="btn btn-light" data-go="discover">Find learning partners</button></article>
+        </div>
+      </section>
+
+      <section id="discoverView" class="view hidden">
+        <div class="section-heading"><div><p class="eyebrow">MAKE A CONNECTION</p><h2>Discover students</h2><p class="muted">Explore the community or start with your best skill matches.</p></div><button id="refreshDiscover" class="btn btn-outline">Refresh</button></div>
+        <div id="matchList" class="people-grid"></div>
+        <h3 class="subheading">Everyone in the community</h3><div id="studentList" class="people-grid"></div>
+      </section>
+
+      <section id="skillsView" class="view hidden">
+        <div class="section-heading"><div><p class="eyebrow">YOUR SKILL PROFILE</p><h2>My skills</h2><p class="muted">Tell the community what you can teach and what you want to learn.</p></div></div>
+        <div class="content-grid">
+          <article class="panel"><h3>＋ Add a skill</h3><form id="skillForm" class="stack-form"><label>Skill name<input id="skillName" placeholder="e.g. Java, UI/UX Design" required maxlength="60"></label><label>Skill category<select id="skillType"><option value="TEACH">I can teach this</option><option value="LEARN">I want to learn this</option></select></label><button class="btn btn-primary" type="submit">Add skill</button><p id="skillMessage" class="form-message"></p></form></article>
+          <article class="panel"><h3>Profile details</h3><form id="profileForm" class="stack-form"><label>College<input id="college" placeholder="Your college"></label><label>Department<input id="department" placeholder="e.g. CSE"></label><label>Short bio<textarea id="bio" rows="3" maxlength="300" placeholder="A little about your interests..."></textarea></label><button class="btn btn-primary" type="submit">Save profile</button><p id="profileMessage" class="form-message"></p></form></article>
+        </div>
+        <div class="content-grid skill-columns"><article class="panel"><h3>Skills I can teach</h3><div id="teachSkills" class="tag-list"></div></article><article class="panel"><h3>Skills I want to learn</h3><div id="learnSkills" class="tag-list"></div></article></div>
+      </section>
+
+      <section id="requestsView" class="view hidden">
+        <div class="section-heading"><div><p class="eyebrow">KEEP LEARNING MOVING</p><h2>Learning requests</h2><p class="muted">Manage requests you've sent and received.</p></div><button id="refreshRequests" class="btn btn-outline">Refresh</button></div>
+        <div id="requestList" class="request-list"></div>
+      </section>
+    </section>
+  </main>
+  <footer>SkillSwap · Learn together, grow together.</footer>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
